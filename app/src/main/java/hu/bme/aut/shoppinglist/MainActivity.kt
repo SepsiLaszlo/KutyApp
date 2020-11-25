@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        applicationContext.deleteDatabase("shopping-list")
+//        applicationContext.deleteDatabase("shopping-list")
 
         database = Room.databaseBuilder(
             applicationContext,

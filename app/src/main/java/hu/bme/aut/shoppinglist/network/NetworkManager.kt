@@ -1,11 +1,11 @@
-package sepsi.laszlo.networking.network
+package hu.bme.aut.shoppinglist.network
 
 import android.os.Handler
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import sepsi.laszlo.networking.model.DogData
+import hu.bme.aut.shoppinglist.model.DogData
 
 object NetworkManager {
     private const val SERVICE_URL = "https://dog.ceo"
@@ -42,8 +42,8 @@ object NetworkManager {
     }
 
     fun getDog(
-        onSuccess: (DogData) -> Unit,
-        onError: (Throwable) -> Unit
+            onSuccess: (DogData) -> Unit,
+            onError: (Throwable) -> Unit
     ){
         val getWeatherRequest = dogApi.getDog()
         runCallOnBackgroundThread(getWeatherRequest, onSuccess, onError)

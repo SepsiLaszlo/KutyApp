@@ -1,4 +1,4 @@
-package sepsi.laszlo.networking.model
+package hu.bme.aut.shoppinglist.model
 
 data class DogData (
     var message: String,
