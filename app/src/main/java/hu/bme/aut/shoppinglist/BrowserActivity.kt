@@ -16,12 +16,14 @@ class BrowserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_browser)
 
-        findViewById<Button>(R.id.button).setOnClickListener {
+        findViewById<Button>(R.id.loadNewDogButton).setOnClickListener {
             buttonFnc()
         }
 
 
     }
+    
+    git add . g
 
     fun buttonFnc() {
         NetworkManager.getDog(::displayDogData, ::showError)
@@ -34,10 +36,10 @@ class BrowserActivity : AppCompatActivity() {
             MainActivity.database.shoppingItemDao().insert(ShoppingItem(null,receivedDogData.message))
         }
 
-        findViewById<TextView>(R.id.textView).text = receivedDogData.message
+        findViewById<TextView>(R.id.dogName).text = receivedDogData.message
         Glide.with(this)
                 .load(receivedDogData.message)
-                .into(findViewById(R.id.imageView))
+                .into(findViewById(R.id.dogImageButton))
     }
 
     private fun showError(throwable: Throwable) {

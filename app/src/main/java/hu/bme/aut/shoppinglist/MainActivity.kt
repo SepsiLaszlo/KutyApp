@@ -46,6 +46,11 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        loadItemsInBackground()
+    }
+
 
     private fun initRecyclerView() {
         recyclerView = MainRecyclerView
