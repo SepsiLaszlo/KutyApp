@@ -1,5 +1,6 @@
 package hu.bme.aut.shoppinglist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -20,21 +21,35 @@ class BrowserActivity : AppCompatActivity() {
             buttonFnc()
         }
 
+        findViewById<Button>(R.id.saveDogButton).setOnClickListener {
+            saveDog()
+        }
 
+        findViewById<Button>(R.id.backButton).setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
-    
-    git add . g
+
+    var currentDog: DogData? = null;
 
     fun buttonFnc() {
         NetworkManager.getDog(::displayDogData, ::showError)
     }
 
 
-    private fun displayDogData(receivedDogData: DogData) {
-        System.out.println(receivedDogData.message)
+    private fun saveDog() {
+        if (currentDog == null) return
+
         thread {
-            MainActivity.database.shoppingItemDao().insert(ShoppingItem(null,receivedDogData.message))
+            MainActivity.database.shoppingItemDao().insert(ShoppingItem(null, currentDog!!.message))
         }
+    }
+
+    private fun displayDogData(receivedDogData: DogData) {
+        currentDog = receivedDogData;
+        System.out.println(receivedDogData.message)
+
 
         findViewById<TextView>(R.id.dogName).text = receivedDogData.message
         Glide.with(this)
