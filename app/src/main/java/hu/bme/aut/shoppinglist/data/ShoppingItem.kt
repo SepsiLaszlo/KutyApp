@@ -8,6 +8,6 @@ import androidx.room.TypeConverter
 @Entity(tableName = "shoppingitem")
 data class ShoppingItem(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) val id: Long?,
-    @ColumnInfo(name = "imageUrl") val nameN: String
+    @ColumnInfo(name = "imageUrl") val name: String
 
 )

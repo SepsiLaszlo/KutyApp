@@ -15,16 +15,22 @@ import hu.bme.aut.shoppinglist.adapter.ShoppingAdapter
 import hu.bme.aut.shoppinglist.data.ShoppingItem
 import hu.bme.aut.shoppinglist.data.ShoppingListDatabase
 import hu.bme.aut.shoppinglist.fragments.NewShoppingItemDialogFragment
+import hu.bme.aut.shoppinglist.model.DogData
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlin.concurrent.thread
 
+fun dogBreed(dog: DogData): String {
+    return dog.message.split("/")[4].split('-').map { it.capitalize() }.joinToString(separator = " ")
+}
+
 class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListener,
-    NewShoppingItemDialogFragment.NewShoppingItemDialogListener {
+        NewShoppingItemDialogFragment.NewShoppingItemDialogListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ShoppingAdapter
-    companion object{
+
+    companion object {
         lateinit var database: ShoppingListDatabase
     }
 
@@ -35,9 +41,9 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
 //        applicationContext.deleteDatabase("shopping-list")
 
         database = Room.databaseBuilder(
-            applicationContext,
-            ShoppingListDatabase::class.java,
-            "shopping-list"
+                applicationContext,
+                ShoppingListDatabase::class.java,
+                "shopping-list"
         ).build()
         initRecyclerView()
         fab.setOnClickListener {
@@ -103,12 +109,11 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
         }
     }
 
-
     override fun onShoppingItemCreated(newItem: ShoppingItem) {
         thread {
             val newId = database.shoppingItemDao().insert(newItem)
             val newShoppingItem = newItem.copy(
-                id = newId
+                    id = newId
             )
             runOnUiThread {
                 adapter.addItem(newShoppingItem)

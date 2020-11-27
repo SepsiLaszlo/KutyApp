@@ -31,7 +31,7 @@ class NewShoppingItemDialogFragment : DialogFragment() {
 
     private fun getShoppingItem() = ShoppingItem(
         id = null,
-        nameN = nameEditText.text.toString()
+        name = nameEditText.text.toString()
 //        description = descriptionEditText.text.toString()
 
     )

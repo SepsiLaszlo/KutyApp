@@ -37,7 +37,6 @@ class BrowserActivity : AppCompatActivity() {
         NetworkManager.getDog(::displayDogData, ::showError)
     }
 
-
     private fun saveDog() {
         if (currentDog == null) return
 
@@ -48,10 +47,7 @@ class BrowserActivity : AppCompatActivity() {
 
     private fun displayDogData(receivedDogData: DogData) {
         currentDog = receivedDogData;
-        System.out.println(receivedDogData.message)
-
-
-        findViewById<TextView>(R.id.dogName).text = receivedDogData.message
+        findViewById<TextView>(R.id.dogName).text = dogBreed(receivedDogData)
         Glide.with(this)
                 .load(receivedDogData.message)
                 .into(findViewById(R.id.dogImageButton))

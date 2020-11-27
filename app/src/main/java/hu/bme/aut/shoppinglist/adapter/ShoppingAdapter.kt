@@ -24,7 +24,7 @@ class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
         // TODO implementation
 
         val item = items[position]
-        holder.nameTextView.text = item.nameN
+        holder.nameTextView.text = item.name
 //        holder.descriptionTextView.text = "Itt volt a leírás."
 
 
