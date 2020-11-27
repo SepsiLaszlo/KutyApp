@@ -1,11 +1,11 @@
-package hu.bme.aut.shoppinglist.network
+package hu.bme.aut.kutyapp.network
 
 import android.os.Handler
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import hu.bme.aut.shoppinglist.model.DogData
+import hu.bme.aut.kutyapp.model.DogData
 
 object NetworkManager {
     private const val SERVICE_URL = "https://dog.ceo"

@@ -1,21 +1,18 @@
-package hu.bme.aut.shoppinglist
+package hu.bme.aut.kutyapp
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import hu.bme.aut.shoppinglist.adapter.ShoppingAdapter
-import hu.bme.aut.shoppinglist.data.ShoppingItem
-import hu.bme.aut.shoppinglist.data.ShoppingListDatabase
-import hu.bme.aut.shoppinglist.fragments.NewShoppingItemDialogFragment
-import hu.bme.aut.shoppinglist.model.DogData
+import hu.bme.aut.kutyapp.adapter.ShoppingAdapter
+import hu.bme.aut.kutyapp.data.DogItem
+import hu.bme.aut.kutyapp.data.DogDatabase
+import hu.bme.aut.kutyapp.model.DogData
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlin.concurrent.thread
@@ -24,14 +21,13 @@ fun dogBreed(dog: DogData): String {
     return dog.message.split("/")[4].split('-').map { it.capitalize() }.joinToString(separator = " ")
 }
 
-class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListener,
-        NewShoppingItemDialogFragment.NewShoppingItemDialogListener {
+class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ShoppingAdapter
 
     companion object {
-        lateinit var database: ShoppingListDatabase
+        lateinit var database: DogDatabase
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +38,7 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
 
         database = Room.databaseBuilder(
                 applicationContext,
-                ShoppingListDatabase::class.java,
+                DogDatabase::class.java,
                 "shopping-list"
         ).build()
         initRecyclerView()
@@ -91,14 +87,14 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
         }
     }
 
-    override fun onItemChanged(item: ShoppingItem) {
+    override fun onItemChanged(item: DogItem) {
         thread {
             database.shoppingItemDao().update(item)
             Log.d("MainActivity", "ShoppingItem update was successful")
         }
     }
 
-    override fun onItemDelete(item: ShoppingItem) {
+    override fun onItemDelete(item: DogItem) {
         thread {
             database.shoppingItemDao().deleteItem(item)
             Log.d("MainActivity", "ShoppingItem deleted was successful")
@@ -109,15 +105,4 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
         }
     }
 
-    override fun onShoppingItemCreated(newItem: ShoppingItem) {
-        thread {
-            val newId = database.shoppingItemDao().insert(newItem)
-            val newShoppingItem = newItem.copy(
-                    id = newId
-            )
-            runOnUiThread {
-                adapter.addItem(newShoppingItem)
-            }
-        }
-    }
 }

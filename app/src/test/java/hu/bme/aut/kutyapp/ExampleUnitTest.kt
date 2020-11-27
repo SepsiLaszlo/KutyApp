@@ -1,4 +1,4 @@
-package hu.bme.aut.shoppinglist
+package hu.bme.aut.kutyapp
 
 import org.junit.Test
 

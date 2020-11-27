@@ -1,18 +1,17 @@
-package hu.bme.aut.shoppinglist.adapter
+package hu.bme.aut.kutyapp.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
-import hu.bme.aut.shoppinglist.R
-import hu.bme.aut.shoppinglist.data.ShoppingItem
+import hu.bme.aut.kutyapp.R
+import hu.bme.aut.kutyapp.data.DogItem
 
 class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
     RecyclerView.Adapter<ShoppingAdapter.ShoppingViewHolder>() {
 
-    private val items = mutableListOf<ShoppingItem>()
+    private val items = mutableListOf<DogItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingViewHolder {
         val itemView: View = LayoutInflater
             .from(parent.context)
@@ -36,8 +35,8 @@ class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
     }
 
     interface ShoppingItemClickListener {
-        fun onItemChanged(item: ShoppingItem)
-        fun onItemDelete(item: ShoppingItem)
+        fun onItemChanged(item: DogItem)
+        fun onItemDelete(item: DogItem)
     }
 
 
@@ -46,7 +45,7 @@ class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
         val nameTextView: TextView
         val removeButton: ImageButton
 
-        var item: ShoppingItem? = null
+        var item: DogItem? = null
 
         init {
             iconImageView = itemView.findViewById(R.id.ShoppingItemIconImageView)
@@ -59,19 +58,19 @@ class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
         }
     }
 
-    fun removeItem(item: ShoppingItem){
+    fun removeItem(item: DogItem){
         val index = items.indexOf(item)
         items.remove(item)
         notifyItemRemoved(index)
     }
-    fun addItem(item: ShoppingItem) {
+    fun addItem(item: DogItem) {
         items.add(item)
         notifyItemInserted(items.size - 1)
     }
 
-    fun update(shoppingItems: List<ShoppingItem>) {
+    fun update(dogItems: List<DogItem>) {
         items.clear()
-        items.addAll(shoppingItems)
+        items.addAll(dogItems)
         notifyDataSetChanged()
     }
 }

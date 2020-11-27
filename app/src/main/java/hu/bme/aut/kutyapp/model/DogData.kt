@@ -1,6 +1,4 @@
-package hu.bme.aut.shoppinglist.model
-
-import android.view.ViewDebug
+package hu.bme.aut.kutyapp.model
 
 data class DogData (
     var message: String,

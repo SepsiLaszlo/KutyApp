@@ -1,4 +1,4 @@
-package hu.bme.aut.shoppinglist
+package hu.bme.aut.kutyapp
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +7,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import hu.bme.aut.shoppinglist.data.ShoppingItem
-import hu.bme.aut.shoppinglist.model.DogData
-import hu.bme.aut.shoppinglist.network.NetworkManager
+import hu.bme.aut.kutyapp.data.DogItem
+import hu.bme.aut.kutyapp.model.DogData
+import hu.bme.aut.kutyapp.network.NetworkManager
 import kotlin.concurrent.thread
 
 class BrowserActivity : AppCompatActivity() {
@@ -41,7 +41,7 @@ class BrowserActivity : AppCompatActivity() {
         if (currentDog == null) return
 
         thread {
-            MainActivity.database.shoppingItemDao().insert(ShoppingItem(null, currentDog!!.message))
+            MainActivity.database.shoppingItemDao().insert(DogItem(null, currentDog!!.message))
         }
     }
 
