@@ -47,7 +47,7 @@ class BrowserActivity : AppCompatActivity() {
 
     private fun displayDogData(receivedDogData: DogData) {
         currentDog = receivedDogData;
-        findViewById<TextView>(R.id.dogName).text = dogBreed(receivedDogData)
+        findViewById<TextView>(R.id.dogName).text = dogBreed(receivedDogData.message)
         Glide.with(this)
                 .load(receivedDogData.message)
                 .into(findViewById(R.id.dogImageButton))

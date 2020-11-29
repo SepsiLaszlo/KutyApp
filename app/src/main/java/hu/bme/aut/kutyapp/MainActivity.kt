@@ -12,13 +12,12 @@ import androidx.room.Room
 import hu.bme.aut.kutyapp.adapter.ShoppingAdapter
 import hu.bme.aut.kutyapp.data.DogItem
 import hu.bme.aut.kutyapp.data.DogDatabase
-import hu.bme.aut.kutyapp.model.DogData
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlin.concurrent.thread
 
-fun dogBreed(dog: DogData): String {
-    return dog.message.split("/")[4].split('-').map { it.capitalize() }.joinToString(separator = " ")
+fun dogBreed(url: String): String {
+    return url.split("/")[4].split('-').map { it.capitalize() }.joinToString(separator = " ")
 }
 
 class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListener {

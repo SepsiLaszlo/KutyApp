@@ -1,18 +1,23 @@
 package hu.bme.aut.kutyapp.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import hu.bme.aut.kutyapp.R
 import hu.bme.aut.kutyapp.data.DogItem
+import hu.bme.aut.kutyapp.dogBreed
 
 class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
     RecyclerView.Adapter<ShoppingAdapter.ShoppingViewHolder>() {
 
     private val items = mutableListOf<DogItem>()
+    private var context:Context?=null;
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingViewHolder {
+        context = parent.context;
         val itemView: View = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_shopping_list, parent, false)
@@ -23,11 +28,11 @@ class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
         // TODO implementation
 
         val item = items[position]
-        holder.nameTextView.text = item.name
-//        holder.descriptionTextView.text = "Itt volt a leírás."
-
-
+        holder.nameTextView.text = dogBreed(item.name)
         holder.item = item
+
+
+        context?.let { Glide.with(it).load(item.name).into(holder.iconImageView) }
     }
 
     override fun getItemCount(): Int {
