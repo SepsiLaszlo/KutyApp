@@ -104,4 +104,9 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
         }
     }
 
+    override fun onItemSelected(item: DogItem?) {
+        Log.d("MainActivity", "ShoppingItem update was successful")
+    }
+
+
 }

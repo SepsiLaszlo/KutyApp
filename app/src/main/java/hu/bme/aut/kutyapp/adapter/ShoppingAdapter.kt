@@ -42,6 +42,7 @@ class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
     interface ShoppingItemClickListener {
         fun onItemChanged(item: DogItem)
         fun onItemDelete(item: DogItem)
+        fun onItemSelected(item: DogItem?)
     }
 
 
@@ -57,6 +58,9 @@ class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
             nameTextView = itemView.findViewById(R.id.ShoppingItemNameTextView)
             removeButton = itemView.findViewById(R.id.ShoppingItemRemoveButton)
 
+            itemView.setOnClickListener{
+              listener?.onItemSelected(item);
+            }
             removeButton.setOnClickListener{
                 listener.onItemDelete(item!!)
             }
