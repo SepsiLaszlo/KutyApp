@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="6"
-    tools:context=".ListActivity">
+    tools:context=".ViewActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/dogName"
+            android:id="@+id/viewDogName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -28,7 +28,7 @@
         android:layout_weight="4">
 
         <ImageButton
-            android:id="@+id/dogImageButton"
+            android:id="@+id/viewDogImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -44,7 +44,7 @@
         android:layout_weight="1">
 
           <Button
-              android:id="@+id/saveDogButton"
+              android:id="@+id/viewBackButton"
               android:layout_height="match_parent"
               android:layout_width="match_parent"
               android:text="@string/Back" />

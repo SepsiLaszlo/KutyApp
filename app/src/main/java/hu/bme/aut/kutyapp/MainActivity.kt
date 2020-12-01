@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
 
     override fun onItemSelected(item: DogItem?) {
         val intent = Intent(this, ViewActivity::class.java)
+        intent.putExtra("DogUrl", item!!.name)
         startActivity(intent)
     }
 }
