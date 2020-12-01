@@ -59,7 +59,7 @@ class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
             removeButton = itemView.findViewById(R.id.ShoppingItemRemoveButton)
 
             itemView.setOnClickListener{
-              listener?.onItemSelected(item);
+              listener.onItemSelected(item);
             }
             removeButton.setOnClickListener{
                 listener.onItemDelete(item!!)

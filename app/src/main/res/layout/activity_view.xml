@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="6"
-    tools:context=".BrowserActivity">
+    tools:context=".ListActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/DogName"
+            android:text="Kutya Neve"
             android:textSize="36sp" />
 
     </FrameLayout>
@@ -33,39 +33,22 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:padding="0dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/abc_vector_test" />
 
     </FrameLayout>
 
-    <LinearLayout
+      <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:weightSum="3">
+        android:layout_weight="1">
 
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/Back" />
+          <Button
+              android:id="@+id/saveDogButton"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:text="@string/Back" />
 
-        <Button
-            android:id="@+id/loadNewDogButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/Next" />
-            <Button
-        android:id="@+id/saveDogButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/Star" />
-
-
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

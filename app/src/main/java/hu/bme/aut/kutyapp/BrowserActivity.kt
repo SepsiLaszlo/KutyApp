@@ -18,7 +18,7 @@ class BrowserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_browser)
 
         findViewById<Button>(R.id.loadNewDogButton).setOnClickListener {
-            buttonFnc()
+            loadDog()
         }
 
         findViewById<Button>(R.id.saveDogButton).setOnClickListener {
@@ -29,11 +29,12 @@ class BrowserActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+        loadDog()
     }
 
     var currentDog: DogData? = null;
 
-    fun buttonFnc() {
+    fun loadDog() {
         NetworkManager.getDog(::displayDogData, ::showError)
     }
 
