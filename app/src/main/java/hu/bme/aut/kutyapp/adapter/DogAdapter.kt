@@ -11,42 +11,39 @@ import hu.bme.aut.kutyapp.R
 import hu.bme.aut.kutyapp.data.DogItem
 import hu.bme.aut.kutyapp.dogBreed
 
-class ShoppingAdapter(private val listener: ShoppingItemClickListener) :
-    RecyclerView.Adapter<ShoppingAdapter.ShoppingViewHolder>() {
+class DogAdapter(private val listener: DogItemClickListener) :
+    RecyclerView.Adapter<DogAdapter.DogViewHolder>() {
 
     private val items = mutableListOf<DogItem>()
     private var context:Context?=null;
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
         context = parent.context;
         val itemView: View = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_shopping_list, parent, false)
-        return ShoppingViewHolder(itemView)
+            .inflate(R.layout.item_dog_list, parent, false)
+        return DogViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ShoppingViewHolder, position: Int) {
-        // TODO implementation
-
+    override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
         val item = items[position]
-        holder.nameTextView.text = dogBreed(item.name)
+        holder.nameTextView.text = dogBreed(item.url)
         holder.item = item
 
-
-        context?.let { Glide.with(it).load(item.name).into(holder.iconImageView) }
+        context?.let { Glide.with(it).load(item.url).into(holder.iconImageView) }
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-    interface ShoppingItemClickListener {
+    interface DogItemClickListener {
         fun onItemChanged(item: DogItem)
         fun onItemDelete(item: DogItem)
         fun onItemSelected(item: DogItem?)
     }
 
 
-    inner class ShoppingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class DogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val iconImageView: ImageView
         val nameTextView: TextView
         val removeButton: ImageButton

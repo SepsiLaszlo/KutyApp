@@ -3,7 +3,9 @@ package hu.bme.aut.kutyapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -42,7 +44,21 @@ class BrowserActivity : AppCompatActivity() {
         if (currentDog == null) return
 
         thread {
-            MainActivity.database.shoppingItemDao().insert(DogItem(null, currentDog!!.message))
+            if (MainActivity.database.dogDao().getByUrl(currentDog!!.message).size == 0) {
+                MainActivity.database.dogDao().insert(DogItem(null, currentDog!!.message))
+            }
+            else{
+                runOnUiThread {
+
+                  var toast = Toast.makeText(
+                        applicationContext,
+                        "Nem lehet többször kedvelni :(",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.setGravity(Gravity.TOP ,0,0);
+                    toast.show()
+                }
+            }
         }
     }
 
@@ -50,16 +66,16 @@ class BrowserActivity : AppCompatActivity() {
         currentDog = receivedDogData;
         findViewById<TextView>(R.id.dogName).text = dogBreed(receivedDogData.message)
         Glide.with(this)
-                .load(receivedDogData.message)
-                .into(findViewById(R.id.dogImageButton))
+            .load(receivedDogData.message)
+            .into(findViewById(R.id.dogImageButton))
     }
 
     private fun showError(throwable: Throwable) {
         throwable.printStackTrace()
         Toast.makeText(
-                this,
-                "Network request error occurred, check LOG",
-                Toast.LENGTH_SHORT
+            this,
+            "Network request error occurred, check LOG",
+            Toast.LENGTH_SHORT
         ).show()
     }
 }

@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "shoppingitem")
 data class DogItem(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) val id: Long?,
-    @ColumnInfo(name = "imageUrl") val name: String
+    @ColumnInfo(name = "imageUrl") val url: String
 
 )

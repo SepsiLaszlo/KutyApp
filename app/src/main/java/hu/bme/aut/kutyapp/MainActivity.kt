@@ -4,12 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import hu.bme.aut.kutyapp.adapter.ShoppingAdapter
+import hu.bme.aut.kutyapp.adapter.DogAdapter
 import hu.bme.aut.kutyapp.data.DogItem
 import hu.bme.aut.kutyapp.data.DogDatabase
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,10 +18,10 @@ fun dogBreed(url: String): String {
     return url.split("/")[4].split('-').map { it.capitalize() }.joinToString(separator = " ")
 }
 
-class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListener {
+class MainActivity : AppCompatActivity(), DogAdapter.DogItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: ShoppingAdapter
+    private lateinit var adapter: DogAdapter
 
     companion object {
         lateinit var database: DogDatabase
@@ -45,6 +43,7 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
             val intent = Intent(this, BrowserActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     override fun onStart() {
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
 
     private fun initRecyclerView() {
         recyclerView = MainRecyclerView
-        adapter = ShoppingAdapter(this)
+        adapter = DogAdapter(this)
         loadItemsInBackground()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
@@ -63,7 +62,7 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
 
     private fun loadItemsInBackground() {
         thread {
-            val items = database.shoppingItemDao().getAll()
+            val items = database.dogDao().getAll()
             runOnUiThread {
                 adapter.update(items)
             }
@@ -72,14 +71,14 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
 
     override fun onItemChanged(item: DogItem) {
         thread {
-            database.shoppingItemDao().update(item)
+            database.dogDao().update(item)
             Log.d("MainActivity", "ShoppingItem update was successful")
         }
     }
 
     override fun onItemDelete(item: DogItem) {
         thread {
-            database.shoppingItemDao().deleteItem(item)
+            database.dogDao().deleteItem(item)
             Log.d("MainActivity", "ShoppingItem deleted was successful")
 
             runOnUiThread {
@@ -90,7 +89,7 @@ class MainActivity : AppCompatActivity(), ShoppingAdapter.ShoppingItemClickListe
 
     override fun onItemSelected(item: DogItem?) {
         val intent = Intent(this, ViewActivity::class.java)
-        intent.putExtra("DogUrl", item!!.name)
+        intent.putExtra("DogUrl", item!!.url)
         startActivity(intent)
     }
 }
