@@ -53,7 +53,7 @@ class BrowserActivity : AppCompatActivity() {
         if (currentDog == null) return
 
         thread {
-            if (MainActivity.database.dogDao().getByUrl(currentDog!!.message).size == 0) {
+            if (MainActivity.database.dogDao().getByUrl(currentDog!!.message).isEmpty()) {
                 MainActivity.database.dogDao().insert(DogItem(null, currentDog!!.message))
             } else {
                 runOnUiThread {
