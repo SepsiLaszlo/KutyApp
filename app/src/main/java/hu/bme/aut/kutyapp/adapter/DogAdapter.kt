@@ -51,9 +51,9 @@ class DogAdapter(private val listener: DogItemClickListener) :
         var item: DogItem? = null
 
         init {
-            iconImageView = itemView.findViewById(R.id.ShoppingItemIconImageView)
-            nameTextView = itemView.findViewById(R.id.ShoppingItemNameTextView)
-            removeButton = itemView.findViewById(R.id.ShoppingItemRemoveButton)
+            iconImageView = itemView.findViewById(R.id.DogIconImageView)
+            nameTextView = itemView.findViewById(R.id.DogItemNameTextView)
+            removeButton = itemView.findViewById(R.id.DogRemoveButton)
 
             itemView.setOnClickListener{
               listener.onItemSelected(item);
