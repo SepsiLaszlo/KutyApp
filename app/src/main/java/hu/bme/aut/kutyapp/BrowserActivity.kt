@@ -40,22 +40,30 @@ class BrowserActivity : AppCompatActivity() {
         NetworkManager.getDog(::displayDogData, ::showError)
     }
 
+    private fun showError(throwable: Throwable) {
+        throwable.printStackTrace()
+        Toast.makeText(
+            this,
+            "Network request error occurred, check LOG",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
     private fun saveDog() {
         if (currentDog == null) return
 
         thread {
             if (MainActivity.database.dogDao().getByUrl(currentDog!!.message).size == 0) {
                 MainActivity.database.dogDao().insert(DogItem(null, currentDog!!.message))
-            }
-            else{
+            } else {
                 runOnUiThread {
 
-                  var toast = Toast.makeText(
+                    var toast = Toast.makeText(
                         applicationContext,
                         "Nem lehet többször kedvelni :(",
                         Toast.LENGTH_SHORT
                     )
-                    toast.setGravity(Gravity.TOP ,0,0);
+                    toast.setGravity(Gravity.TOP, 0, 0);
                     toast.show()
                 }
             }
@@ -70,12 +78,4 @@ class BrowserActivity : AppCompatActivity() {
             .into(findViewById(R.id.dogImageButton))
     }
 
-    private fun showError(throwable: Throwable) {
-        throwable.printStackTrace()
-        Toast.makeText(
-            this,
-            "Network request error occurred, check LOG",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 }
