@@ -31,12 +31,12 @@ class MainActivity : AppCompatActivity(), DogAdapter.DogItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-//        applicationContext.deleteDatabase("shopping-list")
+//        applicationContext.deleteDatabase("dogs")
 
         database = Room.databaseBuilder(
                 applicationContext,
                 DogDatabase::class.java,
-                "shopping-list"
+                "dogs"
         ).build()
         initRecyclerView()
         fab.setOnClickListener {

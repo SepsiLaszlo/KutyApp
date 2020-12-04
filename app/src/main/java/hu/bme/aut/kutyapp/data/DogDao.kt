@@ -4,10 +4,10 @@ import androidx.room.*
 
 @Dao
 interface DogDao {
-    @Query("SELECT * FROM shoppingitem")
+    @Query("SELECT * FROM dogs")
     fun getAll(): List<DogItem>
 
-    @Query("SELECT * FROM shoppingitem WHERE imageUrl = :url")
+    @Query("SELECT * FROM dogs WHERE imageUrl = :url")
     fun getByUrl(url:String): List<DogItem>
 
     @Insert
